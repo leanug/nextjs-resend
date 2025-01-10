@@ -4,7 +4,7 @@ import { MailDataState } from "@/types";
 import { Resend } from "resend"
 import { z } from 'zod' 
 import { WelcomeEmailTemplate } from "@/templates/emails/welcome-email-template";
-import NotionMagicLinkEmail from "@/templates/emails/magic-link";
+//import NotionMagicLinkEmail from "@/templates/emails/magic-link";
 
 export async function sendMailAction(prevState: MailDataState, formData: FormData) {
   console.log('Email:', formData.get('email'))
@@ -22,8 +22,8 @@ export async function sendMailAction(prevState: MailDataState, formData: FormDat
   })
 
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const email = formData.get('email');
-  const message = formData.get('message');
+  const email = formData.get('email') as string;
+  const message = formData.get('message') as string;
 
   try {
     // Validate the data using the schema
@@ -36,7 +36,7 @@ export async function sendMailAction(prevState: MailDataState, formData: FormDat
       console.log(validatedFields.error.flatten().fieldErrors);
       return {message: 'validation error'};
     }
-    
+
     const emailPayload = {
       from: `My Website <info@scriptingpixels.com>`, 
       to: process.env.SMTP_EMAIL as string, 

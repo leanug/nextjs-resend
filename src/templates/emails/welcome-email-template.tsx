@@ -6,20 +6,17 @@ import {
   Container,
   Preview,
   Text,
-  Img,
   Link,
 } from "@react-email/components";
 
 type WelcomeEmailTemplateProps = {
   message: string;
   email: string;
-  magicLink: string; // New prop for the magic link
 };
 
 export const WelcomeEmailTemplate = ({
   message,
   email,
-  magicLink,
 }: WelcomeEmailTemplateProps) => {
   const containerStyle = {
     maxWidth: "600px",
@@ -61,20 +58,6 @@ export const WelcomeEmailTemplate = ({
           </Text>
           <Text style={textStyle}>
             <strong>Message:</strong> {message}
-          </Text>
-          <Text style={textStyle}>
-            We&apos;ve sent you a magic link to complete your login or verification. Please click the link below to continue:
-          </Text>
-          <Text style={textStyle}>
-            <Link href={magicLink} style={{ ...linkStyle, display: "inline-block", marginTop: "10px" }}>
-              Click here to activate your account
-            </Link>
-          </Text>
-          <Text style={textStyle}>
-            This link will expire in 30 minutes.
-          </Text>
-          <Text style={textStyle}>
-            If you didn&apos;t request this, please ignore this message.
           </Text>
           <Text style={textStyle}>
             Best regards,<br />

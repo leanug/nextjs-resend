@@ -6,10 +6,10 @@ import { MailDataState } from '@/types';
 
 const initialState: MailDataState = {
   message: '',
-}
+};
 
 function SendMailForm() {
-  const [state, sendMail, pending] = useActionState(sendMailAction, initialState)
+  const [state, sendMail, isPending] = useActionState(sendMailAction, initialState)
   
   return (
     <form action={sendMail} className="space-y-4">
@@ -41,14 +41,14 @@ function SendMailForm() {
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md"
           ></textarea>
         </div>
-        <p aria-live="polite">{state?.message}</p>
+        {state?.message && <p>{state?.message}</p>}
         <button 
           className="w-full px-4 bg-blue-500 py-2 text-white font-medium rounded-md"
-          disabled={pending}
+          disabled={isPending}
         >
-          Send mail
+          {isPending ? 'Sending...' : 'Send'}
         </button>
-      </form>
+      </form> 
   )
 }
 
